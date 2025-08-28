@@ -22,10 +22,6 @@ public class MyReactiveRepositoryAdapter extends ReactiveAdapterOperations<
         this.userEntityMapper = userEntityMapper;
     }
     @Override
-    public Mono<Void> deleteById(String id) {
-        return null;
-    }
-    @Override
     public Mono<User> saveUser(User user) {
         UserEntity toSave = userEntityMapper.toEntity(user);
         return super.repository.save(toSave)
