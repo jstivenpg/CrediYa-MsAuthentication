@@ -1,18 +1,18 @@
 package co.com.pragma.crediya.model.user;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class User {
     private final Long id;
     private final String names;
     private final String lastNames;
-    private final Date birthdate;
+    private final LocalDate birthdate;
     private final String address;
     private final String phone;
     private final Email email;
     private final BaseSalary baseSalary;
 
-    private User(Long id, String names, String lastNames, Date birthdate,
+    private User(Long id, String names, String lastNames, LocalDate birthdate,
                  String address, String phone, Email email, BaseSalary baseSalary) {
 
         if (names == null || names.isBlank()) throw new IllegalArgumentException("The names are required");
@@ -27,7 +27,7 @@ public class User {
         this.email = email;
         this.baseSalary = baseSalary;
     }
-    public static User create(String names, String lastNames, Date birthdate,
+    public static User create(String names, String lastNames, LocalDate birthdate,
                               String address, String phone, Email email, BaseSalary baseSalary) {
         return new User(null, names, lastNames, birthdate, address, phone, email, baseSalary);
     }
@@ -46,7 +46,7 @@ public class User {
         return lastNames;
     }
 
-    public Date getbirthdate() {
+    public LocalDate getbirthdate() {
         return birthdate;
     }
 
