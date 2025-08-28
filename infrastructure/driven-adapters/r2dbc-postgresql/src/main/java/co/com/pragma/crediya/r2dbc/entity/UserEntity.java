@@ -1,5 +1,7 @@
 package co.com.pragma.crediya.r2dbc.entity;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +12,7 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Table(name = "users")
 @AllArgsConstructor
@@ -20,10 +22,11 @@ import java.util.Date;
 @Builder
 public class UserEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String names;
     private String lastNames;
-    private Date birthdate;
+    private LocalDate birthdate;
     private String address;
     private String phone;
     private String email;
