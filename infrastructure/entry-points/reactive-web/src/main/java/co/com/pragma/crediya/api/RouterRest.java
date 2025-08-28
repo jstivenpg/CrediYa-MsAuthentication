@@ -1,20 +1,21 @@
 package co.com.pragma.crediya.api;
 
+import co.com.pragma.crediya.api.docs.UserControllerDocs;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
+import org.springframework.web.reactive.function.server.RequestPredicates;
 import org.springframework.web.reactive.function.server.RouterFunction;
+import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
-import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
-import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
-import static org.springframework.web.reactive.function.server.RouterFunctions.route;
-
 @Configuration
-public class RouterRest {
+public class RouterRest implements UserControllerDocs {
     @Bean
-    public RouterFunction<ServerResponse> routerFunction(Handler handler) {
-        return route(GET("/api/usecase/path"), handler::listenGETUseCase)
-                .andRoute(POST("/api/usecase/otherpath"), handler::listenPOSTUseCase)
-                .and(route(GET("/api/otherusercase/path"), handler::listenGETOtherUseCase));
+    public RouterFunction<ServerResponse> routerFunction(UserHandler userHandler) {
+        return RouterFunctions.route()
+                 .POST("/api/v1/users",
+                        RequestPredicates.contentType(MediaType.APPLICATION_JSON),
+                        userHandler::listenSaveUser).build();
     }
 }
